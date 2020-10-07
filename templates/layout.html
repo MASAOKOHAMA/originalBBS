@@ -6,8 +6,11 @@
         <style>body {padding: 80px;}</style>
     </head>
     <body>
-    <ul class='navbar-nav'>
+     <ul class='navbar-nav'>
                 {% if user.is_authenticated %}
+                    <li class='nav-time'>
+                        <a href='{% url "bbs:index" %}'>HOME</a>
+                    </li>
                     <li class='nav-time'>
                         <span class='navbar-text'>{{ user }} - </span>
                     </li>
@@ -15,6 +18,9 @@
                         <a href='{% url "logout" %}' class='logout nav-link'>Logout</a>
                     </li>
                 {% else %}
+                    <li class='nav-time'>
+                        <a href='{% url "bbs:index" %}'>HOME</a>
+                    </li>
                     <li class='nav-item'>
                         <a href='{% url "login" %}' class='login nav-link'>Login</a>
                     </li>

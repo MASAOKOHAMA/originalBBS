@@ -3,7 +3,6 @@
     <h1>{{ message }}</h1>
     <form action='{% url "bbs:create" %}' method='post' class='form'>
         {% csrf_token %}
-        {% bootstrap_form articleForm layout='horizontal' %}
         <button type='submit'>作成する</button>
         <a href='{% url "bbs:index" %}'>戻る</a>
     </form>
