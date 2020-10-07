@@ -1,0 +1,25 @@
+{% extends './base.html' %}
+{% block content %}
+    <h1>paiza bbs</h1>
+    <p>{{ message }}</p>
+	{% if searchForm %}
+	    <form action='{% url "bbs:index" %}' method='get'>
+	        <div class='form-group'>
+	            {{ searchForm }}
+	            <input type="submit" value="OK" />
+	            <a href="{% url 'bbs:index' %}">クリア</a>
+	        </div>
+	    </form>
+	{% endif %}
+    {% for article in articles %}
+        <p>
+            {{ article.content }},{{ article.user_name }},
+            <a href='{% url "bbs:detail" article.id %}'>詳細</a>,
+            <a href='{% url "bbs:delete" article.id %}'>削除</a>
+        </p>
+    {% endfor %}
+
+    <div>
+        <a href='{% url "bbs:new" %}'>新規</a>
+    </div>
+{% endblock %}
