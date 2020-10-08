@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from .models import Article
 from .forms import SearchForm
 from .forms import ArticleForm
+# from .forms import CountForm
+
 
 def index(request):
     searchForm = SearchForm(request.GET)
@@ -13,10 +15,16 @@ def index(request):
         searchForm = SearchForm()
         articles = Article.objects.all()
 
+    if request.method == 'POST':
+       Article.good_count += 1
+       Article.save()
+    good_count = Article.objects.get(pk=1).good_count
+
     context = {
         'message': 'First Work',
         'articles': articles,
         'searchForm': searchForm,
+        'count': good_count
     }
     return render(request, 'bbs/index.html', context)
 
@@ -27,8 +35,6 @@ def detail(request, id):
         'article': article,
     }
     return render(request, 'bbs/detail.html', context)
-
-
 
 def create(request):
     if request.method == 'POST':
@@ -51,6 +57,19 @@ def new(request):
     }
     return render(request, 'bbs/new.html', context)
 
+# def new(request):
+#     if request.method == 'POST':
+#         articleForm = ArticleForm(request.POST)
+#         if articleForm.is_valid():
+#             article = articleForm.save()
+#
+#     context = {
+#         'message': 'Create article ' + str(article.id),
+#         'articleForm': articleForm,
+#         'article': article,
+#     }
+#     return render(request, 'bbs/new.html', context)
+
 def delete(request, id):
     article = get_object_or_404(Article, pk=id)
     article.delete()
@@ -61,3 +80,27 @@ def delete(request, id):
         'articles': articles,
     }
     return render(request, 'bbs/index.html', context)
+
+def edit(request, id):
+    article = get_object_or_404(Article, pk=id)
+    articleForm = ArticleForm(instance=article)
+
+    context = {
+        'message': 'Edit Article',
+        'article': article,
+        'articleForm': articleForm,
+    }
+    return render(request, 'bbs/edit.html', context)
+
+def update(request, id):
+    if request.method == 'POST':
+        article = get_object_or_404(Article, pk=id)
+        articleForm = ArticleForm(request.POST, instance=article)
+        if articleForm.is_valid():
+            articleForm.save()
+
+    context = {
+        'message': 'Update article ' + str(id),
+        'article': article,
+    }
+    return render(request, 'bbs/detail.html', context)
