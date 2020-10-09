@@ -14,10 +14,10 @@ def index(request):
     else:
         searchForm = SearchForm()
         articles = Article.objects.all()
-
+    # article = Article.objects.get(pk=1)
     # if request.method == 'POST':
-    #     Article.good_count += 1
-    #     Article.save()
+    #     article.good_count += 1
+    #     article.save()
     # good_count = Article.objects.get(pk=1).good_count
 
     context = {
@@ -26,14 +26,16 @@ def index(request):
         'searchForm': searchForm,
         # 'count': good_count
     }
+    print("init")
     return render(request, 'bbs/index.html', context)
 
-def good(request):
-    article = Article.objects.get(pk=1)
+def good(request, id):
+    article = get_object_or_404(Article, pk=id)
     if request.method == 'POST':
         article.good_count += 1
         article.save()
-    good_count = Article.objects.get(pk=1).good_count
+    print("good")
+    good_count = get_object_or_404(Article, pk=id).good_count
     context = {
         'count': good_count
     }
