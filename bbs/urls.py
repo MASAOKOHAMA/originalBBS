@@ -5,7 +5,7 @@ app_name = 'bbs'
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('', views.good, name='good'),
+    path('<int:pk>', views.good, name='good'),
     path('<int:id>', views.detail, name='detail'),
     path('new', views.new, name='new'),
     path('create', views.create, name='create'),

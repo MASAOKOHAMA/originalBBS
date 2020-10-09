@@ -15,6 +15,7 @@ def index(request):
         searchForm = SearchForm()
         articles = Article.objects.all()
     # article = Article.objects.get(pk=1)
+    # article = get_object_or_404(Article, pk=id)
     # if request.method == 'POST':
     #     article.good_count += 1
     #     article.save()
@@ -26,7 +27,7 @@ def index(request):
         'searchForm': searchForm,
         # 'count': good_count
     }
-    print("init")
+    print("index")
     return render(request, 'bbs/index.html', context)
 
 def good(request, id):
