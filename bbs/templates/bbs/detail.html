@@ -2,7 +2,8 @@
 {% block content %}
     <h1>original bbs</h1>
     <p>{{ message }}</p>
-    <p>{{ article.content }}, {{ article.user_name }}</p>
+    <p>{{ article.content }}, {{ article.user_name }}, {{ article.good_count }}</p>
+    <p><img src='{{article.images.url}}' width=300></p>
     <p>
         <a href='{% url "bbs:index" %}' class='btn btn-outline-primary'>一覧</a>
         <a href='{% url "bbs:edit" article.id %}' class='btn btn-outline-primary'>編集</a>
