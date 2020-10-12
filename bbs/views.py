@@ -30,13 +30,15 @@ def index(request):
     print("index")
     return render(request, 'bbs/index.html', context)
 
-def good(request, id):
-    article = get_object_or_404(Article, pk=id)
-    if request.method == 'POST':
-        article.good_count += 1
-        article.save()
+def good(request, pk):
+    article = get_object_or_404(Article, pk=pk)
+    # if request.method == '':
+    article.good_count += 1
+    article.save()
     print("good")
-    good_count = get_object_or_404(Article, pk=id).good_count
+    print(article)
+    print(article.good_count)
+    good_count = get_object_or_404(Article, pk=pk).good_count
     context = {
         'count': good_count
     }

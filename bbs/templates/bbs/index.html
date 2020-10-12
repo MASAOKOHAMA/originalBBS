@@ -20,12 +20,15 @@
                     <a href='{% url "bbs:detail" article.id %}' class='btn btn-outline-primary'>詳細</a>
                 </td>
                 <td>
-                    <form action="" method="POST">
-                    <button type="SUBMIT" class='btn btn-outline-primary'>
-                        {{ article.good_count }} いいね
-                        {% csrf_token %}
-                    </button>
-                    </form>
+                    <a href='{% url "bbs:good" article.id %}' class='btn btn-outline-primary'>いいね　{{ article.good_count }}</a>
+<!--                    <a href='{% url "bbs:good" article.pk %}' class='btn btn-outline-primary'>-->
+<!--                    <form action="" method="POST">-->
+<!--                    <button type="SUBMIT">-->
+<!--                        {{ article.good_count }} いいね-->
+<!--                        {% csrf_token %}-->
+<!--                    </button>-->
+<!--                    </form>-->
+<!--                    </a>-->
                 </td>
             </tr>
         {% endfor %}
