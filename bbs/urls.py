@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
-from django.conf import settings
-from django.conf.urls.static import static
+# from django.conf import settings
+# from django.conf.urls.static import static
 
 app_name = 'bbs'
 
@@ -13,6 +13,5 @@ urlpatterns = [
     path('<int:id>/delete', views.delete, name='delete'),
     path('<int:id>/edit', views.edit, name='edit'),
     path('<int:id>/update', views.update, name='update'),
-    path('<int:id>/delete', views.delete, name='delete'),
     path('<int:pk>', views.good, name='good'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] #+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

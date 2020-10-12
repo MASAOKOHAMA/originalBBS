@@ -1,17 +1,18 @@
 {% extends './base.html' %}
 {% block content %}
-    <h1>original bbs</h1>
+    <h1>Original BBS</h1>
     <p>{{ message }}</p>
 	{% if searchForm %}
 	    <form action='{% url "bbs:index" %}' method='get'>
 	        <div class='form-group'>
 	            {{ searchForm }}
 	            <input type="submit" value="OK" />
-	            <a href="{% url 'bbs:index' %}">クリア</a>
+	            <a href="{% url 'bbs:index' %}" class='btn btn-light'>clear</a>
 	        </div>
 	    </form>
 	{% endif %}
     <table  class='table table-striped table-hover'>
+        <tr><th>content</th><th>user</th><th>detail</th><th>good</th></tr>
         {% for article in articles %}
             <tr>
                 <td>{{ article.content }}</td>
@@ -20,7 +21,7 @@
                     <a href='{% url "bbs:detail" article.id %}' class='btn btn-outline-primary'>詳細</a>
                 </td>
                 <td>
-                    <a href='{% url "bbs:good" article.pk %}' class='btn btn-outline-primary'>いいね　{{ article.good_count }}</a>
+                    <a href='{% url "bbs:good" article.pk %}' class='btn btn-outline-primary'>{{ article.good_count }} いいね</a>
 <!--                    <a href='{% url "bbs:good" article.pk %}' class='btn btn-outline-primary'>-->
 <!--                    <form action="" method="POST">-->
 <!--                    <button type="SUBMIT">-->
@@ -34,6 +35,6 @@
         {% endfor %}
     </table>
     <div>
-        <a href='{% url "bbs:new" %}'>新規</a>
+        <a href='{% url "bbs:new" %}' class="btn btn-primary">新規</a>
     </div>
 {% endblock %}

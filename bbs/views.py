@@ -14,18 +14,10 @@ def index(request):
     else:
         searchForm = SearchForm()
         articles = Article.objects.all()
-    # article = Article.objects.get(pk=1)
-    # article = get_object_or_404(Article, pk=id)
-    # if request.method == 'POST':
-    #     article.good_count += 1
-    #     article.save()
-    # good_count = Article.objects.get(pk=1).good_count
-
     context = {
-        'message': 'First Work',
+        'message': """Masao's First Work""",
         'articles': articles,
         'searchForm': searchForm,
-        # 'count': good_count
     }
     print("index")
     return render(request, 'bbs/index.html', context)
@@ -39,9 +31,24 @@ def good(request, pk):
     print(article)
     print(article.good_count)
     good_count = get_object_or_404(Article, pk=pk).good_count
+    # context = {
+    #     'count': good_count
+    # }
+    #####
+    searchForm = SearchForm(request.GET)
+    if searchForm.is_valid():
+        keyword = searchForm.cleaned_data['keyword']
+        articles = Article.objects.filter(content__contains=keyword)
+    else:
+        searchForm = SearchForm()
+        articles = Article.objects.all()
     context = {
+        'message': 'Good Article ' + str(pk),
+        'articles': articles,
+        'searchForm': searchForm,
         'count': good_count
     }
+    #####
     return render(request, 'bbs/index.html', context)
 
 def detail(request, id):
@@ -61,7 +68,8 @@ def create(request):
             article = articleForm.save()
 
     context = {
-        'message': 'Create article ' + str(article.id),
+        # 'message': 'Create article ' + str(article.id),
+        'message': 'Create Article ',
         'article': article,
     }
     return render(request, 'bbs/detail.html', context)
@@ -91,11 +99,18 @@ def new(request):
 def delete(request, id):
     article = get_object_or_404(Article, pk=id)
     article.delete()
-
-    articles = Article.objects.all()
+    # articles = Article.objects.all()
+    searchForm = SearchForm(request.GET)
+    if searchForm.is_valid():
+        keyword = searchForm.cleaned_data['keyword']
+        articles = Article.objects.filter(content__contains=keyword)
+    else:
+        searchForm = SearchForm()
+        articles = Article.objects.all()
     context = {
-        'message': 'Delete article ' + str(id),
+        'message': 'Delete Article ' + str(id),
         'articles': articles,
+        'searchForm': searchForm,
     }
     return render(request, 'bbs/index.html', context)
 
@@ -118,7 +133,7 @@ def update(request, id):
             articleForm.save()
 
     context = {
-        'message': 'Update article ' + str(id),
+        'message': 'Update Article ' + str(id),
         'article': article,
     }
     return render(request, 'bbs/detail.html', context)
