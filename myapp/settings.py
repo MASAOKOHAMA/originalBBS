@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap4',
+    # 'webpush',
 ]
 
 
@@ -96,6 +97,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# WEBPUSH_SETTINGS = {
+#    "VAPID_PUBLIC_KEY": "先ほどmemoしたPublic Key",
+#    "VAPID_PRIVATE_KEY": "先ほどmemoしたPrivate Key",
+#    "VAPID_ADMIN_EMAIL": "example@example.com（任意のメールアドレス）"
+# }
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/

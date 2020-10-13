@@ -1,6 +1,6 @@
 from django import forms
 from .models import Article
-
+from .models import Comment
 
 class ArticleForm(forms.ModelForm):
     class Meta:
@@ -9,3 +9,8 @@ class ArticleForm(forms.ModelForm):
 
 class SearchForm(forms.Form):
     keyword = forms.CharField(label='Search', max_length=100)
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('text',)

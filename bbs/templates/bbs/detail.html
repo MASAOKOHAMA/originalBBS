@@ -2,11 +2,20 @@
 {% block content %}
     <h1>Original BBS</h1>
     <p>{{ message }}</p>
-    <p>{{ article.content }}, {{ article.user_name }}</p>
-    <p><img src='{{article.images.url}}' width=300></p>
+    <table class="table">
+        <tr><td>content</td><td>{{ article.content }}</td></tr>
+        <tr><td>user</td><td>{{ article.user_name }}</td></tr>
+        <tr><td>good</td><td>{{ article.good_count }}</td></tr>
+    </table>
+    <p>
+        <img src='{{article.images.url}}' width=300>
+    </p>
     <p>
         <a href='{% url "bbs:index" %}' class='btn btn-outline-primary'>一覧</a>
         <a href='{% url "bbs:edit" article.id %}' class='btn btn-outline-primary'>編集</a>
         <a href='{% url "bbs:delete" article.id %}' class='btn btn-outline-secondary'>削除</a>
+    </p>
+    <p>
+        <a href='{% url "bbs:comment" article.id %}' class='btn btn-primary'>コメントする</a>
     </p>
 {% endblock %}
