@@ -35,7 +35,9 @@
             </tr>
         {% endfor %}
     </table>
+    {% if user.is_authenticated %}
     <div>
         <a href='{% url "bbs:new" %}' class="btn btn-primary">新規</a>
     </div>
+    {% endif %}
 {% endblock %}

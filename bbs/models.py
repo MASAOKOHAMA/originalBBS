@@ -14,3 +14,4 @@ class Comment(models.Model):
     text = models.CharField('コメント', max_length=300)
     target = models.ForeignKey(Article, on_delete=models.CASCADE, verbose_name='紐づく日記')
     created_at = models.DateTimeField(auto_now_add=True)
+    article_id = models.IntegerField(default=0)
