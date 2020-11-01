@@ -2,8 +2,6 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Article
 from .forms import SearchForm
 from .forms import ArticleForm
-from .forms import CommentForm
-from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 def index(request):
@@ -69,37 +67,6 @@ def favo(request, id):
     }
     return render(request, 'bbs/index.html', context)
 
-def detail(request, id):
-    article = get_object_or_404(Article, pk=id)
-    articleForm = ArticleForm(instance=article)
-    context = {
-        'message': 'Show Article ' + str(id),
-        'article': article,
-        'articleForm': articleForm,
-    }
-    return render(request, 'bbs/detail.html', context)
-
-def create(request):
-    if request.method == 'POST':
-        articleForm = ArticleForm(request.POST)
-        if articleForm.is_valid():
-            article = articleForm.save()
-
-    context = {
-        'message': 'Create article ' + str(article.id),
-        'article': article,
-    }
-    return render(request, 'bbs/detail.html', context)
-
-def new(request):
-    articleForm = ArticleForm()
-
-    context = {
-        'message': 'New Article',
-        'articleForm': articleForm,
-    }
-    return render(request, 'bbs/new.html', context)
-
 def delete(request, id):
     article = get_object_or_404(Article, pk=id)
     article.delete()
@@ -117,10 +84,39 @@ def delete(request, id):
     }
     return render(request, 'bbs/index.html', context)
 
+def detail(request, id):
+    article = get_object_or_404(Article, pk=id)
+    articleForm = ArticleForm(instance=article)
+    context = {
+        'message': 'Show Article ' + str(id),
+        'article': article,
+        'articleForm': articleForm,
+    }
+    return render(request, 'bbs/detail.html', context)
+
+def new(request):
+    articleForm = ArticleForm()
+    context = {
+        'message': 'New Article',
+        'articleForm': articleForm,
+    }
+    return render(request, 'bbs/new.html', context)
+
+def create(request):
+    if request.method == 'POST':
+        articleForm = ArticleForm(request.POST)
+        if articleForm.is_valid():
+            article = articleForm.save()
+    context = {
+        'message': 'Create article ' + str(article.id),
+        'article': article,
+        'articleForm': articleForm,
+    }
+    return render(request, 'bbs/detail.html', context)
+
 def edit(request, id):
     article = get_object_or_404(Article, pk=id)
     articleForm = ArticleForm(instance=article)
-
     context = {
         'message': 'Edit Article',
         'article': article,
@@ -134,33 +130,9 @@ def update(request, id):
         articleForm = ArticleForm(request.POST, instance=article)
         if articleForm.is_valid():
             articleForm.save()
-
     context = {
         'message': 'Update article ' + str(id),
         'article': article,
+        'articleForm': articleForm,
     }
     return render(request, 'bbs/detail.html', context)
-
-# def comment(request, id):
-#     comment = get_object_or_404(Comment, pk=id)
-#     commentForm = CommentForm(instance=comment)
-#
-#     context = {
-#         'message': 'Add Comment',
-#         'comment': comment,
-#         'commentForm': commentForm,
-#     }
-#     return render(request, 'bbs/comment.html', context)
-#
-# def comment_up(request, id):
-#     if request.method == 'POST':
-#         comment = get_object_or_404(Comment, pk=id)
-#         commentForm = CommentForm(request.POST, instance=comment)
-#         if commentForm.is_valid():
-#             commentForm.save()
-#
-#     context = {
-#         'message': 'Add Comment ' + str(id),
-#         'comment': comment,
-#     }
-#     return render(request, 'bbs/detail.html', context)
