@@ -3,8 +3,7 @@
 
 {% block content %}
     <h1>{{ message }}</h1>
-<!--    <form action='{% url "bbs:create" %}' method='post' class='form'>-->
-    <form action='{% url "bbs:BoardCreate" %}' method='post' class='form'>
+    <form action='' method='post' class='form'>
         {% csrf_token %}
         {% bootstrap_form articleForm layout='horizontal' %}
         <button type='submit' class='btn btn-outline-primary'>作成する</button>
