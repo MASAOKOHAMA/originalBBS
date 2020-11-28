@@ -71,10 +71,10 @@ def new(request):
     }
     return render(request, 'bbs/new.html', context)
 
-class BoardCreate(CreateView):
+class ArticleCreate(CreateView):
     template_name = 'bbs/new.html'
     model = Article
-    fields = ('images', 'content')
+    fields = ('images', 'content', 'user_name')
     success_url = reverse_lazy("bbs:index")
 
     def form_valid(self, form):

@@ -18,12 +18,4 @@
             <a href='{% url "bbs:delete" article.id %}' class='btn btn-outline-secondary'>削除</a>
         {% endif %}
     </p>
-<!--    <form action='{% url "bbs:update" article.id %}' method='post' class='form'>-->
-<!--        {% csrf_token %}-->
-<!--        {% bootstrap_form articleForm layout='horizontal' %}-->
-<!--    </form>-->
-
-<!--    <p>-->
-<!--        <button type='submit' class='btn btn-primary'>コメントする</button>-->
-<!--    </p>-->
 {% endblock %}
