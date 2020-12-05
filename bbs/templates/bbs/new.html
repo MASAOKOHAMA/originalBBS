@@ -6,7 +6,9 @@
     <form action='{% url "bbs:index" %}' method='post' class='form' enctype="multipart/form-data">
 <!--    <form action='{% url "bbs:create" %}' method='post' class='form'>-->
         {% csrf_token %}
-        {% bootstrap_form articleForm layout='horizontal' %}
+        <p>Content：<input type='text' name='content'></p>
+        <p>User_name：<input type='text' name='user_name'></p>
+        <p>images：<input type='file' name='images'></p>
         <button type='submit' class='btn btn-outline-primary'>作成する</button>
         <a href='{% url "bbs:index" %}' class='btn btn-outline-secondary'>戻る</a>
     </form>
