@@ -3,8 +3,7 @@
 
 {% block content %}
     <h1>{{ message }}</h1>
-    <form action='{% url "bbs:index" %}' method='post' class='form' enctype="multipart/form-data">
-<!--    <form action='{% url "bbs:create" %}' method='post' class='form'>-->
+    <form action='{% url "bbs:create" %}' method='post' class='form' enctype="multipart/form-data">
         {% csrf_token %}
         <p>Content：<input type='text' name='content'></p>
         <p>User_name：<input type='text' name='user_name'></p>

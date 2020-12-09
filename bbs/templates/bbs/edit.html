@@ -3,11 +3,11 @@
 
 {% block content %}
     <h1>{{ message }}</h1>
-    <p>Content：<input type='text' name='content'></p>
-    <p>User_name：<input type='text' name='user_name'></p>
-    <p>images：<input type='file' name='images'></p>
-    <form action='{% url "bbs:update" article.id %}' method='post' class='form' enctype="multipart/form-data">
+    <form action='{% url "bbs:create" %}' method='post' class='form' enctype="multipart/form-data">
         {% csrf_token %}
+        <p>Content：<input type='text' name='content'></p>
+        <p>User_name：<input type='text' name='user_name'></p>
+        <p>images：<input type='file' name='images'></p>
         <button type='submit' class='btn btn-outline-primary'>保存する</button>
         <a href='{% url "bbs:detail" article.id %}' class='btn btn-outline-secondary'>戻る</a>
     </form>
