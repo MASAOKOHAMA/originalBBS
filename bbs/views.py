@@ -82,9 +82,11 @@ class ArticleCreate(CreateView):
         return super(CreateView, self).form_valid(form)
 
 
-class ArticleUpdate(UpdateView, id):
+# class ArticleUpdate(UpdateView, id):
+class ArticleUpdate(UpdateView):
     template_name = 'bbs/new.html'
     model = Article
+    # model = get_object_or_404(Article, pk=id)
     fields = ('images', 'content', 'user_name')
     success_url = reverse_lazy("bbs:index")
 
